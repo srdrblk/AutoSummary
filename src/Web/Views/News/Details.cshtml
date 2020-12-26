@@ -1,0 +1,36 @@
+﻿@model Contract.Dtos.News.GetNewsDto
+
+<div>
+    <h4>GetNewsDto</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Başlık
+        </dt>
+        <dd class="col-md-12">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            İçerik
+        </dt>
+        <dd class="col-md-12">
+            @Html.Raw(Model.Content)
+        </dd>
+        <dt class="col-sm-2">
+            Özet
+        </dt>
+        <dd class="col-md-12">
+            @Html.DisplayFor(model => model.Summary)
+        </dd>
+        <dt class="col-sm-2">
+            Özet 2
+        </dt>
+        <dd class="col-md-12">
+            @Html.DisplayFor(model => model.SummaryByWordRate)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Düzenle", "Edit", new {  id = Model.Id }) |
+    <a asp-action="Index">Back to List</a>
+</div>
