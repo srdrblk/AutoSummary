@@ -1,8 +1,66 @@
-﻿@{
+﻿@model IEnumerable<string>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    
-</div>
+<div class="row">
+    <div class="col-md-4">
+        <input id="code" name="code" class="form-control" />
+        <input onclick="CheckCode()" value="Check Code" class="btn btn-primary" />
+        <label id="codeReult"></label>
+    </div>
+        <div class="col-md-8">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Kupon
+                        </th>
+
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item)
+                            </td>
+
+
+                            <td>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+<script>
+    function CheckCode() {
+
+        var code = document.getElementById("code").value;
+
+        $.ajax({
+            url: '/Home/CheckCode',
+            data: { 'code' :code},
+            type: "POST",
+
+            success: function (result) {
+                if (result) {
+                    document.getElementById('codeReult').innerHTML = "Geçerli";
+                }
+                else {
+                    document.getElementById('codeReult').innerHTML = "Geçersiz";
+                }
+               
+            },
+            error: function (error) {
+                alert('error; ' + eval(error));
+            }
+        });
+
+    }
+</script>
